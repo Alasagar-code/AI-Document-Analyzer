@@ -1,0 +1,52 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background-color: var(--background);
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure proper focus styling */
+:root {
+  --primary: #1a73e8;
+  --secondary: #f5f5f5;
+  --accent: #e0e0e0;
+  --text: #202020;
+  --border: #e0e0e0;
+  --success: #4caf50;
+  --danger: #f44336;
+}
+
+.dark {
+  --text: #ffffff;
+  --background: #202020;
+  --primary: #1a73e8;
+  --secondary: #333333;
+  --accent: #444444;
+  --border: #555555;
+  --success: #4caf50;
+  --danger: #f44336;
+}
+
+/* Container max-width */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
