@@ -16,7 +16,7 @@ connectDB(process.env.MONGO_URI);
 
 // Apply CORS middleware
 app.use(cors({
-  origin: "http://localhost:5176",
+  origin: "http://localhost:5174",
   credentials: true
 }));
 
