@@ -119,7 +119,7 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 GEMINI_API_KEY=your_google_ai_api_key
 GEMINI_MODEL=models/gemini-2.5-flash
-FRONTEND_URL=http://localhost:5173
+FRONTEND_URL=http://localhost:5174
 ```
 
 5. Start the dev server:
