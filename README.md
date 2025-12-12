@@ -120,6 +120,9 @@ JWT_SECRET=your_secret_key
 GEMINI_API_KEY=your_google_ai_api_key
 GEMINI_MODEL=models/gemini-2.5-flash
 FRONTEND_URL=http://localhost:5174
+TOKEN_EXPIRE_DAYS=7
+MAX_FILE_SIZE=52428800
+
 ```
 
 5. Start the dev server:
