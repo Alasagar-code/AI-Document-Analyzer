@@ -18,6 +18,7 @@ export default function PDFUploader() {
     setError("");
     setResult(null);
     const f = e.target.files[0];
+    console.log("Selected file:", f);
     if (!f) return;
     if (f.type !== "application/pdf") {
       setError("Please upload a PDF file.");

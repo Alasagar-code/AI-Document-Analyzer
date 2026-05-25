@@ -1,13 +1,27 @@
 // src/controllers/docController.js
 
+
 import { createRequire } from "node:module";
+import path from "path";
 const require = createRequire(import.meta.url);
+
 
 let pdfjsLib = null;
 let pdfParse = null;
+let standardFontDataUrl = null;
 
 try {
-  pdfjsLib = require("pdfjs-dist/legacy/build/pdf.js");
+  pdfjsLib = require("pdfjs-dist/legacy/build/pdf.mjs");
+  // Set standardFontDataUrl for Node.js usage to avoid warning
+  try {
+    standardFontDataUrl = path.join(
+      path.dirname(require.resolve("pdfjs-dist/package.json")),
+      "build/standard_fonts/"
+    );
+    pdfjsLib.GlobalWorkerOptions.standardFontDataUrl = standardFontDataUrl;
+  } catch (e) {
+    console.warn("Failed to set standardFontDataUrl:", e.message);
+  }
 } catch (e) {
   console.warn("pdfjs-dist load failed:", e.message);
   pdfjsLib = null;
@@ -37,7 +51,10 @@ if (process.env.GEMINI_API_KEY) {
 // ---------------- PDF EXTRACTORS ----------------
 async function extractWithPdfJs(buffer) {
   const uint8Array = new Uint8Array(buffer);
-  const loadingTask = pdfjsLib.getDocument({ data: uint8Array });
+  const loadingTask = pdfjsLib.getDocument({
+    data: uint8Array,
+    standardFontDataUrl
+  });
   const pdf = await loadingTask.promise;
   let text = "";
   for (let i = 1; i <= pdf.numPages; i++) {
@@ -185,6 +202,7 @@ export const getHistory = async (req, res) => {
     const docs = await Document.find({ owner: req.user._id })
       .sort({ uploadedAt: -1 })
       .limit(50);
+      console.log(`Fetched ${docs.length} documents for user ${req.user._id}`);
     res.json({ documents: docs });
   } catch {
     res.status(500).json({ message: "Server error" });

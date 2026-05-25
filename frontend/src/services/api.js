@@ -15,10 +15,8 @@ console.log("[API] withCredentials enabled for cookie sending");
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   console.log("[API] Request to:", config.url, "| Token present:", !!token, "| Method:", config.method);
-  if (token) {
-    config.headers = { ...config.headers, Authorization: `Bearer ${token}` };
-    console.log("[API] Authorization header added");
-  }
+// Cookie-based authentication handled automatically via withCredentials: true
+// No need to manually attach tokens
   return config;
 });
 
